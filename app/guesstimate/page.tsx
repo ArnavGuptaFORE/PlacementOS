@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/components/Sidebar';
 import GuesstimateForm from '@/components/GuesstimateForm';
 import ResultCard, { ResultItem, ResultList } from '@/components/ResultCard';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 interface Assumption {
   parameter: string;
@@ -79,6 +80,7 @@ export default function GuesstimatePage() {
   };
 
   return (
+    <ProtectedRoute>
     <div className="flex min-h-screen bg-navy">
       <Sidebar />
       <main className="flex-1 p-8">
@@ -162,6 +164,7 @@ export default function GuesstimatePage() {
         </div>
       </main>
     </div>
+    </ProtectedRoute>
   );
 }
 

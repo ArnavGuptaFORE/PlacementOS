@@ -1,9 +1,13 @@
+'use client';
+
 import Image from 'next/image';
 import Sidebar from '@/components/Sidebar';
 import ChatUI from '@/components/ChatUI';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 export default function ChatPage() {
   return (
+    <ProtectedRoute>
     <div className="flex min-h-screen bg-navy">
       <Sidebar />
       <main className="flex-1 flex flex-col">
@@ -31,6 +35,7 @@ export default function ChatPage() {
         </div>
       </main>
     </div>
+    </ProtectedRoute>
   );
 }
 

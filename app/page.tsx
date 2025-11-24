@@ -25,7 +25,7 @@ export default function HomePage() {
             and land your dream job with intelligent guidance.
           </p>
           <Link
-            href="/dashboard"
+            href="/signup"
             className="inline-block bg-gold text-navy font-semibold px-8 py-4 rounded-lg text-lg hover:bg-gold-light transition-all hover:scale-105"
           >
             Get Started →
@@ -90,10 +90,10 @@ export default function HomePage() {
             Join thousands of students accelerating their placement preparation with AI
           </p>
           <Link
-            href="/dashboard"
+            href="/signup"
             className="inline-block bg-gold text-navy font-semibold px-8 py-4 rounded-lg text-lg hover:bg-gold-light transition-all"
           >
-            Open Dashboard
+            Sign Up Now
           </Link>
         </div>
       </section>

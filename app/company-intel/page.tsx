@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/components/Sidebar';
 import CompanySearchForm from '@/components/CompanySearchForm';
 import ResultCard, { ResultItem, ResultList } from '@/components/ResultCard';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 interface InterviewFocus {
   technicalSkills: string[];
@@ -75,6 +76,7 @@ export default function CompanyIntelPage() {
   };
 
   return (
+    <ProtectedRoute>
     <div className="flex min-h-screen bg-navy">
       <Sidebar />
       <main className="flex-1 p-8">
@@ -155,6 +157,7 @@ export default function CompanyIntelPage() {
         </div>
       </main>
     </div>
+    </ProtectedRoute>
   );
 }
 

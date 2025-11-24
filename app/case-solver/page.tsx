@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/components/Sidebar';
 import CaseInputForm from '@/components/CaseInputForm';
 import ResultCard, { ResultList } from '@/components/ResultCard';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 interface SlideOutline {
   slideNumber: number;
@@ -73,6 +74,7 @@ export default function CaseSolverPage() {
   };
 
   return (
+    <ProtectedRoute>
     <div className="flex min-h-screen bg-navy">
       <Sidebar />
       <main className="flex-1 p-8">
@@ -169,6 +171,7 @@ export default function CaseSolverPage() {
         </div>
       </main>
     </div>
+    </ProtectedRoute>
   );
 }
 

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/components/Sidebar';
 import ResumeForm from '@/components/ResumeForm';
 import ResultCard, { ResultItem, ResultList } from '@/components/ResultCard';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 interface ResumeResult {
   matchScore: number;
@@ -68,6 +69,7 @@ export default function ResumeMatcherPage() {
   };
 
   return (
+    <ProtectedRoute>
     <div className="flex min-h-screen bg-navy">
       <Sidebar />
       <main className="flex-1 p-8">
@@ -120,6 +122,7 @@ export default function ResumeMatcherPage() {
         </div>
       </main>
     </div>
+    </ProtectedRoute>
   );
 }
 

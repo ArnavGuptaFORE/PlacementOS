@@ -1,13 +1,17 @@
+'use client';
+
 import Image from 'next/image';
 import Sidebar from '@/components/Sidebar';
 import ReadinessWidget from '@/components/ReadinessWidget';
 import ModuleCard from '@/components/ModuleCard';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 export default function DashboardPage() {
   return (
-    <div className="flex min-h-screen bg-navy">
-      <Sidebar />
-      <main className="flex-1 p-8">
+    <ProtectedRoute>
+      <div className="flex min-h-screen bg-navy">
+        <Sidebar />
+        <main className="flex-1 p-8">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center space-x-4 mb-8">
             <Image
@@ -102,6 +106,7 @@ export default function DashboardPage() {
         </div>
       </main>
     </div>
+    </ProtectedRoute>
   );
 }
 

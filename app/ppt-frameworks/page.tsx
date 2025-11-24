@@ -6,6 +6,7 @@ import JDForm from '@/components/JDForm';
 import FrameworkCard from '@/components/FrameworkCard';
 import FrameworkVisualizer from '@/components/FrameworkVisualizer';
 import ResultCard, { ResultList } from '@/components/ResultCard';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 interface Framework {
   name: string;
@@ -78,6 +79,7 @@ export default function PPTFrameworksPage() {
   };
 
   return (
+    <ProtectedRoute>
     <div className="flex min-h-screen bg-navy">
       <Sidebar />
       <main className="flex-1 p-8">
@@ -125,6 +127,7 @@ export default function PPTFrameworksPage() {
         </div>
       </main>
     </div>
+    </ProtectedRoute>
   );
 }
 
