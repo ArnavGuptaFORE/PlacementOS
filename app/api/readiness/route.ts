@@ -4,6 +4,9 @@ import { callGroq } from '@/lib/groq';
 import { getReadinessPrompt } from '@/lib/prompts';
 import { getUserIdFromRequest } from '@/lib/auth-helper';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function GET(request: NextRequest) {
   try {
     const userId = getUserIdFromRequest(request);

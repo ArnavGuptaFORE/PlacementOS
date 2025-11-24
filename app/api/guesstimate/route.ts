@@ -4,6 +4,9 @@ import { callGroq } from '@/lib/groq';
 import { getGuesstimatePrompt } from '@/lib/prompts';
 import { getUserIdFromRequest } from '@/lib/auth-helper';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
