@@ -32,20 +32,28 @@ export async function POST(request: NextRequest) {
 
     const result = JSON.parse(response);
 
-    // Save to database
-    const session = await prisma.caseSession.create({
-      data: {
-        userId,
-        inputText: problemText,
-        sessionType: 'ppt-frameworks',
-        result: JSON.stringify(result),
-      },
-    });
+    // Try to save to database (may fail on serverless with SQLite)
+    try {
+      const session = await prisma.caseSession.create({
+        data: {
+          userId,
+          inputText: problemText,
+          sessionType: 'ppt-frameworks',
+          result: JSON.stringify(result),
+        },
+      });
 
-    return NextResponse.json({
-      id: session.id,
-      ...result,
-    });
+      return NextResponse.json({
+        id: session.id,
+        ...result,
+      });
+    } catch (dbError) {
+      console.warn('Database save failed, returning result without saving:', dbError);
+      return NextResponse.json({
+        id: `temp-${Date.now()}`,
+        ...result,
+      });
+    }
   } catch (error) {
     console.error('PPT frameworks error:', error);
     return NextResponse.json(

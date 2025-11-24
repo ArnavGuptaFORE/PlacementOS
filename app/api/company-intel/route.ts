@@ -32,20 +32,28 @@ export async function POST(request: NextRequest) {
 
     const result = JSON.parse(response);
 
-    // Save to database
-    const session = await prisma.companyIntelSession.create({
-      data: {
-        userId,
-        companyName,
-        roleType,
-        result: JSON.stringify(result),
-      },
-    });
+    // Try to save to database (may fail on serverless with SQLite)
+    try {
+      const session = await prisma.companyIntelSession.create({
+        data: {
+          userId,
+          companyName,
+          roleType,
+          result: JSON.stringify(result),
+        },
+      });
 
-    return NextResponse.json({
-      id: session.id,
-      ...result,
-    });
+      return NextResponse.json({
+        id: session.id,
+        ...result,
+      });
+    } catch (dbError) {
+      console.warn('Database save failed, returning result without saving:', dbError);
+      return NextResponse.json({
+        id: `temp-${Date.now()}`,
+        ...result,
+      });
+    }
   } catch (error) {
     console.error('Company intel error:', error);
     return NextResponse.json(

@@ -15,7 +15,20 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const stats = await getReadinessStats(userId);
+    let stats;
+    try {
+      stats = await getReadinessStats(userId);
+    } catch (dbError) {
+      console.warn('Database query failed, returning zero stats:', dbError);
+      // Return zero stats if database fails
+      stats = {
+        resumeAnalyses: 0,
+        caseSessions: 0,
+        guesstimatesSessions: 0,
+        companyIntelSessions: 0,
+        chatMessages: 0,
+      };
+    }
     const simpleScore = calculateSimpleReadinessScore(stats);
 
     // Check if user has any activity

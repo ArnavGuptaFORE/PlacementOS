@@ -24,15 +24,19 @@ export async function POST(request: NextRequest) {
 
     const currentSessionId = sessionId || `session-${Date.now()}`;
 
-    // Save user message
-    await prisma.chatMessage.create({
-      data: {
-        userId,
-        role: 'user',
-        content: message,
-        sessionId: currentSessionId,
-      },
-    });
+    // Try to save user message (may fail on serverless with SQLite)
+    try {
+      await prisma.chatMessage.create({
+        data: {
+          userId,
+          role: 'user',
+          content: message,
+          sessionId: currentSessionId,
+        },
+      });
+    } catch (dbError) {
+      console.warn('Failed to save user message:', dbError);
+    }
 
     // Get chat history for context
     const history = await prisma.chatMessage.findMany({
@@ -73,15 +77,19 @@ export async function POST(request: NextRequest) {
             controller.enqueue(encoder.encode(content));
           }
 
-          // Save assistant response
-          await prisma.chatMessage.create({
-            data: {
-              userId,
-              role: 'assistant',
-              content: fullResponse,
-              sessionId: currentSessionId,
-            },
-          });
+          // Try to save assistant response (may fail on serverless with SQLite)
+          try {
+            await prisma.chatMessage.create({
+              data: {
+                userId,
+                role: 'assistant',
+                content: fullResponse,
+                sessionId: currentSessionId,
+              },
+            });
+          } catch (dbError) {
+            console.warn('Failed to save assistant message:', dbError);
+          }
 
           controller.close();
         } catch (error) {
