@@ -36,28 +36,20 @@ export async function POST(request: NextRequest) {
 
     const result = JSON.parse(response);
 
-    // Try to save to database (may fail on serverless with SQLite)
-    try {
-      const analysis = await prisma.resumeAnalysis.create({
-        data: {
-          userId,
-          inputText: resumeText,
-          jdText: jdText,
-          result: JSON.stringify(result),
-        },
-      });
+    // Save to database with userId
+    const analysis = await prisma.resumeAnalysis.create({
+      data: {
+        userId,
+        inputText: resumeText,
+        jdText: jdText,
+        result: JSON.stringify(result),
+      },
+    });
 
-      return NextResponse.json({
-        id: analysis.id,
-        ...result,
-      });
-    } catch (dbError) {
-      console.warn('Database save failed, returning result without saving:', dbError);
-      return NextResponse.json({
-        id: `temp-${Date.now()}`,
-        ...result,
-      });
-    }
+    return NextResponse.json({
+      id: analysis.id,
+      ...result,
+    });
   } catch (error) {
     console.error('Resume matcher error:', error);
     return NextResponse.json(
