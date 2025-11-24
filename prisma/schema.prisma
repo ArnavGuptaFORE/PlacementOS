@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ResumeAnalysis {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String   // Firebase user ID
+  inputText String
+  jdText    String
+  result    String   // JSON stored as string
+  
+  @@index([userId])
+}
+
+model CaseSession {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String   // Firebase user ID
+  inputText String
+  sessionType String // "case-solver" or "ppt-frameworks"
+  result    String   // JSON stored as string
+  
+  @@index([userId])
+}
+
+model GuesstimateSession {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String   // Firebase user ID
+  inputText String
+  result    String   // JSON stored as string
+  
+  @@index([userId])
+}
+
+model CompanyIntelSession {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String   // Firebase user ID
+  companyName String
+  roleType    String
+  result      String   // JSON stored as string
+  
+  @@index([userId])
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  userId    String   // Firebase user ID
+  role      String   // "user" or "assistant"
+  content   String
+  sessionId String
+  
+  @@index([userId])
+  @@index([sessionId])
+}
+
+

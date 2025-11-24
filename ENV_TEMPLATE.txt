@@ -1,0 +1,65 @@
+# ===================================
+# PlacementOS Environment Variables
+# ===================================
+# Copy this file to .env and fill in your values
+
+# -----------------
+# Groq AI API
+# -----------------
+# Get your API key from: https://console.groq.com
+GROQ_API_KEY=your_groq_api_key_here
+
+# -----------------
+# Database
+# -----------------
+DATABASE_URL="file:./dev.db"
+
+# -----------------
+# Firebase Configuration
+# -----------------
+# Get these from Firebase Console (see instructions below)
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
+
+# ===================================
+# HOW TO GET FIREBASE CONFIG:
+# ===================================
+# 
+# 1. Go to: https://console.firebase.google.com
+# 2. Click "Add project" or select existing project
+# 3. Enter project name (e.g., "PlacementOS")
+# 4. Click through the setup (you can disable Google Analytics)
+# 5. Once created, click the web icon (</>) to add a web app
+# 6. Register your app with a nickname (e.g., "PlacementOS Web")
+# 7. You'll see a firebaseConfig object like this:
+#
+#    const firebaseConfig = {
+#      apiKey: "AIzaSy...",
+#      authDomain: "your-project.firebaseapp.com",
+#      projectId: "your-project-id",
+#      storageBucket: "your-project.appspot.com",
+#      messagingSenderId: "123456789",
+#      appId: "1:123456789:web:abc123"
+#    };
+#
+# 8. Copy each value and paste it above
+#
+# 9. Enable Authentication:
+#    - In Firebase Console, go to "Authentication"
+#    - Click "Get Started"
+#    - Click "Sign-in method" tab
+#    - Enable "Email/Password"
+#    - Click Save
+#
+# 10. Enable Firestore (optional for now):
+#     - In Firebase Console, go to "Firestore Database"
+#     - Click "Create database"
+#     - Start in "Test mode"
+#     - Choose a location
+#
+# ===================================
+
