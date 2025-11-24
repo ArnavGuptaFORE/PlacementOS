@@ -1,8 +1,15 @@
 # PlacementOS 🚀
 
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ArnavGuptaFORE/PlacementOS)
+[![Next.js](https://img.shields.io/badge/Next.js-14+-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
+
 **Your Complete AI-Powered Placement Preparation Platform**
 
 PlacementOS is a production-ready, full-stack web application built to help students dominate placement season with AI-driven tools for resume optimization, case interview preparation, company research, and more.
+
+🚀 **[Deploy on Vercel](https://vercel.com/new/clone?repository-url=https://github.com/ArnavGuptaFORE/PlacementOS)** | 📖 **[Deployment Guide](./DEPLOYMENT.md)** | 🔥 **[Live Demo](#)**
 
 ---
 
