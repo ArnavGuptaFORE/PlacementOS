@@ -6,6 +6,11 @@ import { AuthProvider } from '@/contexts/AuthContext';
 export const metadata: Metadata = {
   title: 'PlacementOS - AI-Powered Placement Preparation',
   description: 'Your complete AI assistant for placement preparation, case interviews, resume optimization, and career readiness.',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({
