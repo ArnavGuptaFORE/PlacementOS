@@ -194,6 +194,10 @@ Return JSON in this exact format:
   "keyMetrics": "<important business metrics to know>"
 }
 
+IMPORTANT: Generate EXACTLY 8-9 interview questions in the "likelyQuestions" array.
+These should be role-specific, covering technical, behavioral, and case/situational questions.
+Each answer should be comprehensive (3-5 sentences) with specific examples and frameworks where applicable.
+
 COMPANY: ${companyName}
 ROLE TYPE: ${roleType}
 
