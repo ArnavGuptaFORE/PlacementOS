@@ -194,14 +194,24 @@ Return JSON in this exact format:
   "keyMetrics": "<important business metrics to know>"
 }
 
-IMPORTANT: Generate EXACTLY 8-9 interview questions in the "likelyQuestions" array.
-These should be role-specific, covering technical, behavioral, and case/situational questions.
-Each answer should be comprehensive (3-5 sentences) with specific examples and frameworks where applicable.
+CRITICAL INSTRUCTIONS:
+1. Research and provide FACTUALLY ACCURATE information about ${companyName}.
+2. The company overview, industry, business model, key products, and competitive position MUST be based on the ACTUAL company, NOT the role type.
+3. DO NOT fabricate or hallucinate company information. If you don't have accurate data, provide general but truthful information.
+4. DO NOT change the company's core business or description based on the role type.
+5. ONLY the following sections should be customized for the "${roleType}" role:
+   - interviewFocus (technical skills, behavioral themes, case types)
+   - likelyQuestions (role-specific interview questions)
+   - preparationTips (role-specific preparation advice)
+
+6. Generate EXACTLY 8-9 interview questions in the "likelyQuestions" array.
+   These should be role-specific, covering technical, behavioral, and case/situational questions.
+   Each answer should be comprehensive (3-5 sentences) with specific examples and frameworks where applicable.
 
 COMPANY: ${companyName}
 ROLE TYPE: ${roleType}
 
-Return ONLY valid JSON.`
+Return ONLY valid JSON with factually accurate company information.`
   };
 }
 
