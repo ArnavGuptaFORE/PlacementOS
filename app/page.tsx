@@ -97,6 +97,34 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-navy-light border-t border-gold/20 py-8 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-cream/80 mb-2">
+            PlacementOS v1.0 • Developed by <span className="text-gold font-semibold">Arnav Gupta</span>
+          </p>
+          <p className="text-cream/60 text-sm mb-3">
+            Contact:{' '}
+            <a href="mailto:arnavgup123@gmail.com" className="text-gold hover:text-gold-light transition-colors">
+              arnavgup123@gmail.com
+            </a>
+            {' '}|{' '}
+            LinkedIn:{' '}
+            <a 
+              href="https://linkedin.com/in/arnav-gupta-7a3034278" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gold hover:text-gold-light transition-colors"
+            >
+              linkedin.com/in/arnav-gupta-7a3034278
+            </a>
+          </p>
+          <p className="text-cream/40 text-xs">
+            © 2025 All Rights Reserved
+          </p>
+        </div>
+      </footer>
     </main>
   );
 }
