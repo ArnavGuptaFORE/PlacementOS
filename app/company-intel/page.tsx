@@ -12,6 +12,11 @@ interface InterviewFocus {
   caseTypes: string[];
 }
 
+interface InterviewQuestion {
+  question: string;
+  answer: string;
+}
+
 interface CompanyResult {
   companyOverview: string;
   industry: string;
@@ -20,7 +25,7 @@ interface CompanyResult {
   recentNews: string[];
   competitivePosition: string;
   interviewFocus: InterviewFocus;
-  likelyQuestions: string[];
+  likelyQuestions: InterviewQuestion[];
   preparationTips: string[];
   keyMetrics: string;
 }
@@ -28,6 +33,17 @@ interface CompanyResult {
 export default function CompanyIntelPage() {
   const [result, setResult] = useState<CompanyResult | null>(null);
   const [loading, setLoading] = useState(false);
+  const [expandedQuestions, setExpandedQuestions] = useState<Set<number>>(new Set());
+
+  const toggleQuestion = (index: number) => {
+    const newExpanded = new Set(expandedQuestions);
+    if (newExpanded.has(index)) {
+      newExpanded.delete(index);
+    } else {
+      newExpanded.add(index);
+    }
+    setExpandedQuestions(newExpanded);
+  };
 
   useEffect(() => {
     const saved = localStorage.getItem('company-intel-result');
@@ -138,12 +154,30 @@ export default function CompanyIntelPage() {
 
               <ResultCard title="Likely Interview Questions">
                 <div className="space-y-3">
-                  {result.likelyQuestions.map((question, index) => (
-                    <div key={index} className="bg-navy border border-gold/20 rounded-lg p-4">
-                      <div className="flex items-start space-x-3">
+                  {result.likelyQuestions.map((q, index) => (
+                    <div key={index} className="bg-navy border border-gold/20 rounded-lg overflow-hidden">
+                      <button
+                        onClick={() => toggleQuestion(index)}
+                        className="w-full p-4 flex items-start space-x-3 hover:bg-navy-light/50 transition-colors text-left"
+                      >
                         <span className="text-gold font-bold">{index + 1}.</span>
-                        <span className="text-cream/80 text-sm flex-1">{question}</span>
-                      </div>
+                        <span className="text-cream/80 text-sm flex-1">{q.question}</span>
+                        <svg
+                          className={`w-5 h-5 text-gold transition-transform flex-shrink-0 ${
+                            expandedQuestions.has(index) ? 'rotate-180' : ''
+                          }`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      {expandedQuestions.has(index) && (
+                        <div className="px-4 pb-4 pt-2 border-t border-gold/10">
+                          <p className="text-cream/70 text-sm leading-relaxed pl-6">{q.answer}</p>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

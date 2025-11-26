@@ -184,7 +184,12 @@ Return JSON in this exact format:
     "behavioralThemes": [<array of cultural fit areas>],
     "caseTypes": [<array of potential case interview types>]
   },
-  "likelyQuestions": [<array of 5-7 probable interview questions>],
+  "likelyQuestions": [
+    {
+      "question": "<interview question>",
+      "answer": "<detailed answer with key points and approach>"
+    }
+  ],
   "preparationTips": [<array of 3-5 specific preparation recommendations>],
   "keyMetrics": "<important business metrics to know>"
 }

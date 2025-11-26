@@ -79,3 +79,5 @@ CREATE INDEX "ChatMessage_userId_idx" ON "ChatMessage"("userId");
 -- CreateIndex
 CREATE INDEX "ChatMessage_sessionId_idx" ON "ChatMessage"("sessionId");
 
+
+
