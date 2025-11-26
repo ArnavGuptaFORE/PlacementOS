@@ -11,7 +11,11 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signIn, signInWithGoogle } = useAuth();
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [resetEmail, setResetEmail] = useState('');
+  const [resetMessage, setResetMessage] = useState('');
+  const [resetError, setResetError] = useState('');
+  const { signIn, signInWithGoogle, resetPassword } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,6 +42,27 @@ export default function LoginPage() {
       router.push('/dashboard');
     } catch (err: any) {
       setError(err.message || 'Failed to sign in with Google');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setResetError('');
+    setResetMessage('');
+    setLoading(true);
+
+    try {
+      await resetPassword(resetEmail);
+      setResetMessage('Password reset email sent! Check your inbox.');
+      setResetEmail('');
+      setTimeout(() => {
+        setShowForgotPassword(false);
+        setResetMessage('');
+      }, 3000);
+    } catch (err: any) {
+      setResetError(err.message || 'Failed to send reset email');
     } finally {
       setLoading(false);
     }
@@ -86,9 +111,18 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-cream mb-2">
-                Password
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label htmlFor="password" className="block text-sm font-medium text-cream">
+                  Password
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setShowForgotPassword(true)}
+                  className="text-xs text-gold hover:text-gold-light transition-colors"
+                >
+                  Forgot Password?
+                </button>
+              </div>
               <input
                 id="password"
                 type="password"
@@ -160,6 +194,71 @@ export default function LoginPage() {
           </Link>
         </p>
       </div>
+
+      {/* Forgot Password Modal */}
+      {showForgotPassword && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center px-4 z-50">
+          <div className="bg-navy-light rounded-xl border border-gold/20 p-8 max-w-md w-full">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold text-cream">Reset Password</h3>
+              <button
+                onClick={() => {
+                  setShowForgotPassword(false);
+                  setResetError('');
+                  setResetMessage('');
+                  setResetEmail('');
+                }}
+                className="text-cream/60 hover:text-cream transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {resetMessage && (
+              <div className="bg-green-500/10 border border-green-500/50 text-green-400 px-4 py-3 rounded-lg mb-6">
+                {resetMessage}
+              </div>
+            )}
+
+            {resetError && (
+              <div className="bg-red-500/10 border border-red-500/50 text-red-400 px-4 py-3 rounded-lg mb-6">
+                {resetError}
+              </div>
+            )}
+
+            <p className="text-cream/70 text-sm mb-6">
+              Enter your email address and we'll send you a link to reset your password.
+            </p>
+
+            <form onSubmit={handleForgotPassword} className="space-y-6">
+              <div>
+                <label htmlFor="reset-email" className="block text-sm font-medium text-cream mb-2">
+                  Email Address
+                </label>
+                <input
+                  id="reset-email"
+                  type="email"
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 bg-navy border border-gold/20 rounded-lg text-cream placeholder-cream/40 focus:outline-none focus:ring-2 focus:ring-gold/50"
+                  placeholder="you@example.com"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-gold text-navy font-semibold py-3 px-6 rounded-lg hover:bg-gold-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? 'Sending...' : 'Send Reset Link'}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
