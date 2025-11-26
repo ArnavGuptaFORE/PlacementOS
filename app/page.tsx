@@ -80,26 +80,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-cream mb-4">
-            Ready to dominate your placements?
-          </h2>
-          <p className="text-cream/70 mb-8">
-            Join thousands of students accelerating their placement preparation with AI
-          </p>
-          <Link
-            href="/signup"
-            className="inline-block bg-gold text-navy font-semibold px-8 py-4 rounded-lg text-lg hover:bg-gold-light transition-all"
-          >
-            Sign Up Now
-          </Link>
-        </div>
-      </section>
-
       {/* Footer */}
-      <footer className="bg-navy-light border-t border-gold/20 py-8 px-4">
+      <footer className="bg-navy border-t border-gold/20 py-8 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-cream/80 mb-2">
             PlacementOS v1.0 • Developed by <span className="text-gold font-semibold">Arnav Gupta</span>
